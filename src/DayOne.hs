@@ -1,5 +1,5 @@
 module DayOne
-  ( processInput,
+  ( processInputDay1,
     generateElfCaloriesList,
     findCaloriesOfElfWithMostCalories,
     findCaloriesOfThreeElvesWithMostCalories,
@@ -13,8 +13,8 @@ import qualified Data.Text as T
 import qualified Data.Text.IO as T
 import System.Environment (getArgs)
 
-processInput :: IO (String, String)
-processInput = do
+processInputDay1 :: IO (String, String)
+processInputDay1 = do
   args <- getArgs
   content <- T.readFile (args !! 0)
   let elfLines = T.lines content

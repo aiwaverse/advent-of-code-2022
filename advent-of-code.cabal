@@ -26,12 +26,14 @@ source-repository head
 library
   exposed-modules:
       DayOne
+      DayTwo
   other-modules:
       Paths_advent_of_code
   hs-source-dirs:
       src
   default-extensions:
       OverloadedStrings
+      ViewPatterns
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       base >=4.7 && <5
