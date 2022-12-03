@@ -3,5 +3,8 @@ cradle:
     - path: "./src/DayOne.hs"
       component: "advent-of-code:lib"
 
+    - path: "./src/DayThree.hs"
+      component: "advent-of-code:lib"
+
     - path: "./src/DayTwo.hs"
       component: "advent-of-code:lib"
