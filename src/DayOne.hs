@@ -22,7 +22,7 @@ processInput = do
   pure (show $ findCaloriesOfElfWithMostCalories calories, show $ findCaloriesOfThreeElvesWithMostCalories calories)
 
 generateElfCaloriesList :: [T.Text] -> [[Integer]]
-generateElfCaloriesList xs = map (map (read . T.unpack)) $ splitOn [""] xs
+generateElfCaloriesList = map (map (read . T.unpack)) . splitOn [""]
 
 findCaloriesOfElfWithMostCalories :: [Integer] -> Integer
 findCaloriesOfElfWithMostCalories = head . sortOn Down
