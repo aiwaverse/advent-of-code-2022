@@ -1,6 +1,14 @@
-module DayThree where
+module DayThree
+  ( processInputDay3,
+    findBadges,
+    rucksackCompartments,
+    findCommonItem,
+    priority,
+  )
+where
 
 import Data.Char (isLower, ord)
+import Data.List (foldl1')
 import Data.Set (elemAt, fromList, intersection)
 import qualified Data.Text as T
 import qualified Data.Text.IO as T
@@ -18,7 +26,7 @@ processInputDay3 = do
 findBadges :: [String] -> [Int]
 findBadges (r1 : r2 : r3 : rr) = priority badge : findBadges rr
   where
-    setOfThree = intersection (intersection (fromList r1) (fromList r2)) (fromList r3)
+    setOfThree = foldl1' intersection (map fromList [r1, r2, r3])
     badge = elemAt 0 setOfThree
 findBadges [] = []
 findBadges _ = [0]
