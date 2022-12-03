@@ -1,4 +1,12 @@
-module DayTwo where
+module DayTwo
+  ( processInputDay2,
+    Play (Rock, Paper, Scissors),
+    totalScore,
+    score,
+    value,
+    result,
+  )
+where
 
 import qualified Data.Text as T
 import qualified Data.Text.IO as T
