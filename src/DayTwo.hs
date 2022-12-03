@@ -17,7 +17,7 @@ data Play = Rock | Paper | Scissors deriving (Show)
 processInputDay2 :: IO (String, String)
 processInputDay2 = do
   args <- getArgs
-  content <- T.readFile (args !! 0)
+  content <- T.readFile (head args)
   pure (show . totalScore $ transformInputPartOne content, show . totalScore $ transformInputPartTwo content)
 
 totalScore :: [(Play, Play)] -> Integer
@@ -41,7 +41,7 @@ result Scissors Paper = 0
 result _ _ = 3
 
 transformInputPartTwo :: T.Text -> [(Play, Play)]
-transformInputPartTwo text = map determinePlayOpponent $ map (T.splitOn " ") (T.lines text)
+transformInputPartTwo text = map (determinePlayOpponent . T.splitOn " ") (T.lines text)
   where
     determinePlayOpponent ["A", me] = (Rock, calculatePlay me Rock)
     determinePlayOpponent ["B", me] = (Paper, calculatePlay me Paper)
@@ -65,7 +65,7 @@ losePlay Scissors = Paper
 losePlay Rock = Scissors
 
 transformInputPartOne :: T.Text -> [(Play, Play)]
-transformInputPartOne text = map determinePlayOpponent $ map (T.splitOn " ") (T.lines text)
+transformInputPartOne text = map (determinePlayOpponent . T.splitOn " ") (T.lines text)
   where
     determinePlayOpponent ["A", me] = (Rock, determinePlayMe me)
     determinePlayOpponent ["B", me] = (Paper, determinePlayMe me)

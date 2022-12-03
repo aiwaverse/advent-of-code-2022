@@ -16,7 +16,7 @@ import System.Environment (getArgs)
 processInputDay1 :: IO (String, String)
 processInputDay1 = do
   args <- getArgs
-  content <- T.readFile (args !! 0)
+  content <- T.readFile (head args)
   let elfLines = T.lines content
   let calories = map sum $ generateElfCaloriesList elfLines
   pure (show $ findCaloriesOfElfWithMostCalories calories, show $ findCaloriesOfThreeElvesWithMostCalories calories)
