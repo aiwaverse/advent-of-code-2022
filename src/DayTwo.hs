@@ -6,11 +6,11 @@ import System.Environment (getArgs)
 
 data Play = Rock | Paper | Scissors deriving (Show)
 
-processInputDay2 :: IO String
+processInputDay2 :: IO (String, String)
 processInputDay2 = do
   args <- getArgs
   content <- T.readFile (args !! 0)
-  pure . show . totalScore $ transformInputPartTwo content
+  pure (show . totalScore $ transformInputPartOne content, show . totalScore $ transformInputPartTwo content)
 
 totalScore :: [(Play, Play)] -> Integer
 totalScore = sum . map (uncurry score)
