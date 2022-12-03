@@ -9,10 +9,19 @@ import System.Environment (getArgs)
 processInputDay3 :: IO (String, String)
 processInputDay3 = do
   args <- getArgs
-  content <- T.readFile (args !! 0)
-  let operation = priority . findCommonItem . rucksackCompartments
+  content <- T.readFile (head args)
+  let operationOne = priority . findCommonItem . rucksackCompartments
   let fileLines = T.lines content
-  pure (show . sum . (map operation) $ fileLines, "")
+  let fileLinesString = map T.unpack fileLines
+  pure (show . sum . map operationOne $ fileLines, show . sum . findBadges $ fileLinesString)
+
+findBadges :: [String] -> [Int]
+findBadges (r1 : r2 : r3 : rr) = priority badge : findBadges rr
+  where
+    setOfThree = intersection (intersection (fromList r1) (fromList r2)) (fromList r3)
+    badge = elemAt 0 setOfThree
+findBadges [] = []
+findBadges _ = [0]
 
 rucksackCompartments :: T.Text -> (T.Text, T.Text)
 rucksackCompartments r = T.splitAt (div (T.length r) 2) r
