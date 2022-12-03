@@ -1,13 +1,4 @@
 cradle:
   stack:
-    - path: "./test/Spec.hs"
-      component: "advent-of-code:test:advent-of-code-test"
-
-    - path: "./app/Main.hs"
-      component: "advent-of-code:exe:advent-of-code-exe"
-
     - path: "./src/DayOne.hs"
-      component: "advent-of-code:lib"
-
-    - path: "./src/Lib.hs"
       component: "advent-of-code:lib"

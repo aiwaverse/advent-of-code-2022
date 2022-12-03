@@ -1,4 +1,10 @@
-module DayOne where
+module DayOne
+  ( processInput,
+    generateElfCaloriesList,
+    findCaloriesOfElfWithMostCalories,
+    findCaloriesOfThreeElvesWithMostCalories,
+  )
+where
 
 import Data.List (sortOn)
 import Data.List.Split (splitOn)
