@@ -25,6 +25,7 @@ source-repository head
 
 library
   exposed-modules:
+      DayFour
       DayOne
       DayThree
       DayTwo
@@ -38,6 +39,7 @@ library
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       base >=4.7 && <5
+    , bifunctors
     , containers
     , split >=0.2.3.5 && <0.3
     , text

@@ -1,3 +1,4 @@
 {
-    "editor.tabSize": 2
+  "editor.tabSize": 2,
+  "editor.fontFamily": "'Hasklug Nerd Font', 'FiraCode Nerd Font Mono', 'Fira Code Regular', 'monospace', monospace, 'Droid Sans Fallback'"
 }
