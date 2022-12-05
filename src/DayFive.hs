@@ -43,7 +43,7 @@ moveB (q, s, f) crates = added
     added = [if i == f then toAdd <> crate else crate | (crate, i) <- zip removed [1 ..]]
 
 processCrateLine :: T.Text -> [T.Text]
-processCrateLine t = T.strip . T.filter (`notElem` ['[', ']']) <$> T.chunksOf 4 (t <> " ")
+processCrateLine t = T.strip . T.filter (`notElem` ['[', ']']) <$> T.chunksOf 4 t
 
 processMovementLine :: T.Text -> (Int, Int, Int)
 processMovementLine t = (read $ w !! 1, read $ w !! 3, read $ w !! 5)
