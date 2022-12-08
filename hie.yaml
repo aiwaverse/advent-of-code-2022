@@ -9,6 +9,12 @@ cradle:
     - path: "./src/DayOne.hs"
       component: "advent-of-code:lib"
 
+    - path: "./src/DaySeven.hs"
+      component: "advent-of-code:lib"
+
+    - path: "./src/DaySix.hs"
+      component: "advent-of-code:lib"
+
     - path: "./src/DayThree.hs"
       component: "advent-of-code:lib"
 
