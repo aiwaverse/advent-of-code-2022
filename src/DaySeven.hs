@@ -22,7 +22,6 @@ processInputDay7 = do
   let sumOfSizes = sum . M.elems . M.filter (<= 100000) $ folders
   let freeSpace = 70000000 - M.findWithDefault 0 "/" folders
   let neededSpace = 30000000 - freeSpace
-  print neededSpace
   let bestFolderToDelete = minimum . M.elems . M.filter (>= neededSpace) $ folders
   pure (show sumOfSizes, show bestFolderToDelete)
 
