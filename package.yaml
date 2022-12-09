@@ -25,6 +25,8 @@ dependencies:
 - split >= 0.2.3.5 && < 0.3
 - containers
 - bifunctors
+- matrix
+- vector
 
 ghc-options:
 - -Wall
