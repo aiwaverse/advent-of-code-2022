@@ -1,11 +1,13 @@
-module DaySeven where
+module DaySeven
+  ( processInputDay7,
+    processSystemLine,
+    sumFolders,
+  )
+where
 
-import Data.Foldable (Foldable (foldl'))
-import Data.List (sort)
 import qualified Data.Map as M
 import qualified Data.Text as T
 import qualified Data.Text.IO as T
-import Debug.Trace
 import System.Environment (getArgs)
 
 type Directories = M.Map T.Text Integer
@@ -46,10 +48,3 @@ dropTwoLast :: [a] -> [a]
 dropTwoLast [] = []
 dropTwoLast [_, _] = []
 dropTwoLast (x : xs) = x : dropTwoLast xs
-
-testIO :: IO ()
-testIO = do
-  content <- T.lines <$> T.readFile "/home/phi/Documents/codes/haskell/advent-of-code/inputs/test.txt"
-  let folders = sumFolders $ processSystemLine content [] M.empty
-  let sumOfSizes = sum . M.elems . M.filter (<= 100000) $ folders
-  print sumOfSizes
