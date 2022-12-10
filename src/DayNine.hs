@@ -1,6 +1,11 @@
-module DayNine where
+module DayNine
+  ( processInputDay9,
+    getPositionsVisited,
+    move,
+  )
+where
 
-import Data.List (foldl', uncons)
+import Data.List (uncons)
 import Data.Maybe (fromJust)
 import qualified Data.Set as Set
 import qualified Data.Text as T
@@ -12,7 +17,7 @@ data Motion = L | R | U | D deriving (Show)
 processInputDay9 :: IO (String, String)
 processInputDay9 = do
   args <- getArgs
-  content <- T.lines <$> T.readFile "/home/phi/Documents/codes/haskell/advent-of-code/inputs/DayNine.txt" -- (head args)
+  content <- T.lines <$> T.readFile (head args)
   let motions = processFile content
   pure (show $ length $ getPositionsVisited (replicate 2 (0, 0)) motions Set.empty, show $ length $ getPositionsVisited (replicate 10 (0, 0)) motions Set.empty)
 
