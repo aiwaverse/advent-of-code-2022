@@ -32,6 +32,7 @@ library
       DayOne
       DaySeven
       DaySix
+      DayTen
       DayThree
       DayTwo
   other-modules:
