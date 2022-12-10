@@ -1,5 +1,8 @@
 cradle:
   stack:
+    - path: "./src/DayEight.hs"
+      component: "advent-of-code:lib"
+
     - path: "./src/DayFive.hs"
       component: "advent-of-code:lib"
 
