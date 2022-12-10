@@ -1,27 +1,33 @@
 module DayNine where
 
-import System.Environment (getArgs)
+import Data.List (foldl', uncons)
+import Data.Maybe (fromJust)
+import qualified Data.Set as Set
 import qualified Data.Text as T
 import qualified Data.Text.IO as T
-import qualified Data.Set as Set
+import System.Environment (getArgs)
 
 data Motion = L | R | U | D deriving (Show)
 
 processInputDay9 :: IO (String, String)
 processInputDay9 = do
   args <- getArgs
-  content <- T.lines <$> T.readFile "/home/phi/Documents/codes/haskell/advent-of-code/inputs/DayNine.txt" --(head args)
+  content <- T.lines <$> T.readFile "/home/phi/Documents/codes/haskell/advent-of-code/inputs/DayNine.txt" -- (head args)
   let motions = processFile content
-  pure (show $ length $ getPositionsVisited ((0, 0), (0, 0)) motions Set.empty, "")
+  pure (show $ length $ getPositionsVisited (replicate 2 (0, 0)) motions Set.empty, show $ length $ getPositionsVisited (replicate 10 (0, 0)) motions Set.empty)
 
-getPositionsVisited :: ((Int, Int), (Int, Int)) -> [Motion] -> Set.Set (Int, Int) -> Set.Set (Int, Int)
-getPositionsVisited (_, t) [] s = Set.insert t s
-getPositionsVisited (h, t) (m : ms) s = let (nh, nt) = move (h, t) m in getPositionsVisited (nh, nt) ms (Set.insert t s)
+getPositionsVisited :: [(Int, Int)] -> [Motion] -> Set.Set (Int, Int) -> Set.Set (Int, Int)
+getPositionsVisited (last -> t) [] s = Set.insert t s
+getPositionsVisited knots (m : ms) s = let newKnots = move knots m in getPositionsVisited newKnots ms (Set.insert (last knots) s)
 
-move :: ((Int, Int), (Int, Int)) -> Motion -> ((Int, Int), (Int, Int))
-move (headPos, tailPos) mt =
-  let newHead = moveHead headPos mt
-   in (newHead, moveTail newHead tailPos)
+move :: [(Int, Int)] -> Motion -> [(Int, Int)]
+move (fromJust . uncons -> (h, t)) mt =
+  let newHead = moveHead h mt
+   in newHead : moveTails newHead t
+
+moveTails :: (Int, Int) -> [(Int, Int)] -> [(Int, Int)]
+moveTails _ [] = []
+moveTails knot (x : xs) = let newTail = moveTail knot x in newTail : moveTails newTail xs
 
 processFile :: [T.Text] -> [Motion]
 processFile [] = []
