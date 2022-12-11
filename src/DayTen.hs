@@ -18,7 +18,7 @@ processInputDay10 :: IO ()
 processInputDay10 = do
   args <- getArgs
   content <- T.lines <$> T.readFile (head args)
-  let (_, exec) = execution content 1
+  let exec = execution content 1
   let cycles = [20, 60, 100, 140, 180, 220]
   let strength = getRelevantSginalStrengths cycles exec
   let instLines = dropLast $ chunksOf 40 exec
@@ -34,11 +34,11 @@ dropLast (x : xs) = x : dropLast xs
 readInst :: T.Text -> [Int -> Int]
 readInst i = case T.words i of
   ["noop"] -> [id]
-  ["addx", read . T.unpack -> n] -> if n < 0 then [id, subtract (abs n)] else [id, (+ n)]
+  ["addx", read . T.unpack -> n] -> [id, (+ n)]
   _ -> error ("Can't read instruction " <> T.unpack i)
 
-execution :: [T.Text] -> Int -> (Int, [Int])
-execution ts regX = (regX :) <$> mapAccumL (\reg inst -> (inst reg, inst reg)) regX insts
+execution :: [T.Text] -> Int -> [Int]
+execution ts regX = reverse $ foldl' (\regs inst -> inst (head regs) : regs) [regX] insts
   where
     insts = concatMap readInst ts
 
@@ -49,7 +49,7 @@ drawLine :: Int -> [Int] -> String
 drawLine _ [] = []
 drawLine point (x : xs)
   | (point - x) `between` (-1, 1) = '#' : drawLine (point + 1) xs
-  | otherwise = '.' : drawLine (point + 1) xs
+  | otherwise = ' ' : drawLine (point + 1) xs
 
 between :: Ord a => a -> (a, a) -> Bool
 between a (x, y) = a >= x && a <= y
