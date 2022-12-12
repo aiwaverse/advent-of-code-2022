@@ -42,6 +42,7 @@ ghc-options:
 default-extensions: 
 - OverloadedStrings
 - ViewPatterns
+- TypeApplications
 
 library:
   source-dirs: src
