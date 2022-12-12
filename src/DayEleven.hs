@@ -1,6 +1,18 @@
 {-# LANGUAGE OverloadedRecordDot #-}
 
-module DayEleven where
+module DayEleven
+  ( processInputDay11,
+    business,
+    readMonkey,
+    processModulo,
+    readOp,
+    monkeyRound,
+    insertItems,
+    adjust,
+    inspect,
+    divisible,
+  )
+where
 
 import Control.Arrow (second)
 import Data.List (foldl', sortOn)
@@ -8,7 +20,7 @@ import Data.List.Split (dropDelims, onSublist, split)
 import Data.Ord (Down (Down))
 import qualified Data.Text as T
 import qualified Data.Text.IO as T
-import System.Environment ( getArgs )
+import System.Environment (getArgs)
 
 data Monkey = Monkey
   { items :: [Int],
@@ -40,12 +52,6 @@ processInputDay11 = do
 
 business :: Monkey -> Monkey -> Int
 business m1 m2 = m1.insepectionCount * m2.insepectionCount
-
--- processedMonkeys :: IO [Monkey]
--- processedMonkeys = do
---   content <- T.lines <$> T.readFile "/home/phi/Documents/codes/haskell/advent-of-code/inputs/DayEleven.txt"
---   let monkeyTexts = split (dropDelims $ onSublist [""]) content
---   pure $ map readMonkey monkeyTexts
 
 readMonkey :: [T.Text] -> Monkey
 readMonkey [_, startingItems, operation, testDef, ifTrue, ifFalse] = Monkey i op n (\x -> if t x then tTrue else tFalse) 0
@@ -82,7 +88,7 @@ insertItems = foldl' (\mList (val, mPos) -> adjust (\m -> m {items = m.items ++ 
 adjust :: (a -> a) -> Int -> [a] -> [a]
 adjust f i = uncurry (++) . second (\xs -> f (head xs) : tail xs) . splitAt i
 
-inspect :: Monkey -> Int -> Int  -> [(Int, Int)]
+inspect :: Monkey -> Int -> Int -> [(Int, Int)]
 inspect m modulo d = map (\item -> let val = m.op item `mod` modulo `div` d in (val, m.test val)) m.items
 
 divisible :: Int -> Int -> Bool
