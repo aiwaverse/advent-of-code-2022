@@ -27,6 +27,8 @@ dependencies:
 - bifunctors
 - matrix
 - vector
+- astar
+- unordered-containers
 
 ghc-options:
 - -Wall
