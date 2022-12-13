@@ -18,13 +18,12 @@ import Data.List (foldl', minimumBy, sortOn)
 import Data.Maybe (fromJust, isJust, mapMaybe)
 import System.Environment (getArgs)
 
-processInputDay12 :: IO ()
+processInputDay12 :: IO (String, String)
 processInputDay12 = do
   args <- getArgs
   content <- lines <$> readFile (head args)
   let g = createGraph content
-  print $ part1 g
-  print $ part2 g
+  pure (show $ part1 g, show $ part2 g)
 
 part1 ::
   ( Graph,

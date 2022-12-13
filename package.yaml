@@ -29,6 +29,7 @@ dependencies:
 - vector
 - astar
 - unordered-containers
+- regex-compat
 
 ghc-options:
 - -Wall

@@ -1,37 +1,40 @@
 cradle:
-  stack:
-    - path: "./src/DayEight.hs"
-      component: "advent-of-code:lib"
+  cabal:
+    - path: "src/DayEight.hs"
+      component: "lib:advent-of-code"
 
-    - path: "./src/DayEleven.hs"
-      component: "advent-of-code:lib"
+    - path: "src/DayEleven.hs"
+      component: "lib:advent-of-code"
 
-    - path: "./src/DayFive.hs"
-      component: "advent-of-code:lib"
+    - path: "src/DayFive.hs"
+      component: "lib:advent-of-code"
 
-    - path: "./src/DayFour.hs"
-      component: "advent-of-code:lib"
+    - path: "src/DayFour.hs"
+      component: "lib:advent-of-code"
 
-    - path: "./src/DayNine.hs"
-      component: "advent-of-code:lib"
+    - path: "src/DayNine.hs"
+      component: "lib:advent-of-code"
 
-    - path: "./src/DayOne.hs"
-      component: "advent-of-code:lib"
+    - path: "src/DayOne.hs"
+      component: "lib:advent-of-code"
 
-    - path: "./src/DaySeven.hs"
-      component: "advent-of-code:lib"
+    - path: "src/DaySeven.hs"
+      component: "lib:advent-of-code"
 
-    - path: "./src/DaySix.hs"
-      component: "advent-of-code:lib"
+    - path: "src/DaySix.hs"
+      component: "lib:advent-of-code"
 
-    - path: "./src/DayTen.hs"
-      component: "advent-of-code:lib"
+    - path: "src/DayTen.hs"
+      component: "lib:advent-of-code"
 
-    - path: "./src/DayThree.hs"
-      component: "advent-of-code:lib"
+    - path: "src/DayThirteen.hs"
+      component: "lib:advent-of-code"
 
-    - path: "./src/DayTwelve.hs"
-      component: "advent-of-code:lib"
+    - path: "src/DayThree.hs"
+      component: "lib:advent-of-code"
 
-    - path: "./src/DayTwo.hs"
-      component: "advent-of-code:lib"
+    - path: "src/DayTwelve.hs"
+      component: "lib:advent-of-code"
+
+    - path: "src/DayTwo.hs"
+      component: "lib:advent-of-code"

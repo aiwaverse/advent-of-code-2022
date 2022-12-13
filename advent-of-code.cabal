@@ -34,6 +34,7 @@ library
       DaySeven
       DaySix
       DayTen
+      DayThirteen
       DayThree
       DayTwelve
       DayTwo
@@ -52,6 +53,7 @@ library
     , bifunctors
     , containers
     , matrix
+    , regex-compat
     , split >=0.2.3.5 && <0.3
     , text
     , unordered-containers

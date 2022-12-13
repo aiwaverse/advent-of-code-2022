@@ -59,6 +59,10 @@ extra-deps:
 - psqueues-0.2.7.3@sha256:7213d78598d397255b1861df318d9b5058577f86a9b83a8b652540cbdbc83033,4834
 - unordered-containers-0.2.19.1@sha256:db11042bb0356c0adea277d0794743829125b4c99455af6af2bd5f7bd5e88a39,3797
 - astar-0.3.0.0@sha256:8bf6350542e9db9451490e8993560ee843dc48a61d46a206985430f9b62461c8,967
+- regex-compat-0.95.2.1@sha256:96c83b06280ebfb6fef01864b2af9eb9e136a9832c563773f327d4197bbbb851,1705
+- regex-base-0.94.0.2@sha256:4ff4425c710cddf440dfbac6cd52310bb6b23e17902390ff71c9fc7eaafc4fcc,2643
+- regex-posix-0.96.0.1@sha256:9dbba4b65a3bb6975d9740814be5593c6b2d2d6a0b3febc8ec940edb9a9bbdf4,2954
+
 # Override default flag values for local packages and extra-deps
 # flags: {}
 
