@@ -46,6 +46,7 @@ default-extensions:
 - OverloadedStrings
 - ViewPatterns
 - TypeApplications
+- TupleSections
 
 library:
   source-dirs: src

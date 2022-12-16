@@ -1,11 +1,16 @@
-{-#LANGUAGE TupleSections #-}
 module DayFourteen where
 
-import Data.List.Split ( splitOn )
-import Data.Matrix hiding ( trace )
-import Data.List (foldl', find)
+import Data.List (find, foldl')
+import Data.List.Split (splitOn)
+import Data.Matrix
+  ( Matrix (ncols),
+    fromList,
+    getCol,
+    setElem,
+    (!),
+  )
 import qualified Data.Vector as V
-import System.Environment ( getArgs )
+import System.Environment (getArgs)
 
 -- I want to apologize for this solution, this is so horrible and almost luck that I want to rewrite this completely
 -- But until then, behold, this code only works with these numbers (or larger), don't change them
@@ -30,31 +35,33 @@ countSands m c = case dropSand m (1, 501) of
 dropSand :: Matrix Char -> (Int, Int) -> Maybe (Matrix Char)
 dropSand m pos = case nextPos of
   Nothing -> Nothing
-  Just p -> if p == pos then Nothing else Just $ setElem 'o' p m 
-  where nextPos = nextSandPos m pos
+  Just p -> if p == pos then Nothing else Just $ setElem 'o' p m
+  where
+    nextPos = nextSandPos m pos
 
 nextSandPos :: Matrix Char -> (Int, Int) -> Maybe (Int, Int)
 nextSandPos m (x, y) = case offset of
   Nothing -> Nothing
-  Just n  -> case newPos n of 
+  Just n -> case newPos n of
     Nothing -> Just (x, y)
     Just np -> nextSandPos m np
   where
-    offset = fmap (subtract 1 . snd) $ find (\(c, i) -> (c == '#' || c == 'o') && i > x) $ zip (V.toList $ getCol y m) ([1..] :: [Int])
-    newPos ofst | ofst /= x = Just (ofst, y)
-                | (y - 1) > 0 && m ! (ofst + 1, y - 1) == '.' = Just (ofst + 1, y - 1)
-                | (y + 1) < ncols m && m ! (ofst + 1, y + 1) == '.' = Just (ofst + 1, y + 1)
-                | otherwise = Nothing
+    offset = fmap (subtract 1 . snd) $ find (\(c, i) -> (c == '#' || c == 'o') && i > x) $ zip (V.toList $ getCol y m) ([1 ..] :: [Int])
+    newPos ofst
+      | ofst /= x = Just (ofst, y)
+      | (y - 1) > 0 && m ! (ofst + 1, y - 1) == '.' = Just (ofst + 1, y - 1)
+      | (y + 1) < ncols m && m ! (ofst + 1, y + 1) == '.' = Just (ofst + 1, y + 1)
+      | otherwise = Nothing
 
 calculateCoordinates :: (Int, Int) -> (Int, Int) -> [(Int, Int)]
 calculateCoordinates s@(startX, startY) e@(endX, endY)
   | startX == endX = verticalLine s e [] (signum (endY - startY))
   | otherwise = horizontalLine s e [] (signum (endX - startX))
- where
-   verticalLine :: (Int, Int) -> (Int, Int) -> [(Int, Int)] -> Int -> [(Int, Int)]
-   verticalLine (sx, sy) (ex, ey) acc c = if sy == ey then (ex, ey) : acc else verticalLine (sx, sy + c) (ex, ey) ((sx, sy) : acc) c
-   horizontalLine :: (Int, Int) -> (Int, Int) -> [(Int, Int)] -> Int -> [(Int, Int)]
-   horizontalLine (sx, sy) (ex, ey) acc c = if sx == ex then (ex, ey) : acc else horizontalLine (sx + c, sy) (ex, ey) ((sx, sy) : acc) c
+  where
+    verticalLine :: (Int, Int) -> (Int, Int) -> [(Int, Int)] -> Int -> [(Int, Int)]
+    verticalLine (sx, sy) (ex, ey) acc c = if sy == ey then (ex, ey) : acc else verticalLine (sx, sy + c) (ex, ey) ((sx, sy) : acc) c
+    horizontalLine :: (Int, Int) -> (Int, Int) -> [(Int, Int)] -> Int -> [(Int, Int)]
+    horizontalLine (sx, sy) (ex, ey) acc c = if sx == ex then (ex, ey) : acc else horizontalLine (sx + c, sy) (ex, ey) ((sx, sy) : acc) c
 
 generatePairs :: [String] -> [((Int, Int), (Int, Int))]
 generatePairs (s : sx : ssx) = read ("((" <> s <> "),(" <> sx <> "))") : generatePairs (sx : ssx)
